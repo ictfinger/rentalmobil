@@ -3,7 +3,7 @@
 import { cars } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
+import BookNowButton from '@/components/BookNowButton';
 
 type CarDetailsPageProps = {
   params: {
@@ -51,14 +51,7 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
           </div>
           <div className="flex items-center justify-between">
             <p className="text-3xl font-bold">${car.price_per_day}<span className="text-lg font-normal">/day</span></p>
-            <Link
-              href={`/cars/${car.id}/book`}
-              className={`px-6 py-3 rounded-lg text-white font-semibold ${car.is_available ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'}`}
-              aria-disabled={!car.is_available}
-              onClick={(e) => !car.is_available && e.preventDefault()}
-            >
-              Book Now
-            </Link>
+            <BookNowButton carId={car.id} isAvailable={car.is_available} />
           </div>
         </div>
       </div>
